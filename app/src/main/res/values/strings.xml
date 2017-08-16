@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">BakingApp</string>
+    <string name="recipe_json_pref_key">RECIPE_JSON_PREF_KEY</string>
+    <string name="recipe_intent_key">RECIPE_INTENT_KEY</string>
+    <string name="title_instruction_list">Instructions</string>
+    <string name="title_instruction_detail">Instruction Detail</string>
+</resources>
