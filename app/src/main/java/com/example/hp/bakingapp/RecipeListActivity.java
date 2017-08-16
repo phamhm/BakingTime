@@ -7,10 +7,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.example.hp.bakingapp.RecyclerViews.RecyclerAdapter;
 import com.example.hp.bakingapp.Utilities.NetworkUtility;
-import com.example.hp.bakingapp.Utilities.Recipe;
 import com.example.hp.bakingapp.Utilities.RecipeDatabase;
-
-import java.util.List;
 
 public class RecipeListActivity extends AppCompatActivity {
 
@@ -30,8 +27,6 @@ public class RecipeListActivity extends AppCompatActivity {
             // load data from the internet again
             db = new RecipeDatabase(this);
             db.cleanupData();
-            List<Recipe> recipeList = NetworkUtility.getRecipesFromServer(getApplicationContext());
-            db.insertRecipeFromList(recipeList);
         }
 
         RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.rv_recipe_names);
@@ -41,7 +36,7 @@ public class RecipeListActivity extends AppCompatActivity {
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
-        mAdapter.updateData(db);
+        NetworkUtility.getRecipesFromServer(mAdapter, db);
     }
 
     @Override
@@ -60,10 +55,5 @@ public class RecipeListActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         db.close();
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
     }
 }
