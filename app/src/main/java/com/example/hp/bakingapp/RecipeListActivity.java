@@ -26,7 +26,6 @@ public class RecipeListActivity extends AppCompatActivity {
         if (savedInstanceState == null){
             // load data from the internet again
             db = new RecipeDatabase(this);
-            db.cleanupData();
         }
 
         RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.rv_recipe_names);

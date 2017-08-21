@@ -255,34 +255,38 @@ public class RecipeDatabase extends SQLiteOpenHelper {
     }
 
     public void insertRecipe(Recipe recipe){
-        SQLiteDatabase db = this.getWritableDatabase();
-
         final int recipeId = recipe.getId();
+        String existedRecipeName = getRecipeNameById(recipeId);
 
-        ContentValues contentValues = new ContentValues();
+        if (existedRecipeName == null) {
 
-        contentValues.put(RECIPE_ID_COL, recipeId);
-        contentValues.put(RECIPE_NAME_COL, recipe.getName());
-        db.insert(RECIPE_TABLE_NAME, null, contentValues);
+            SQLiteDatabase db = this.getWritableDatabase();
 
-        for(Ingredient ingredient : recipe.getIngredients()){
-            contentValues.clear();
-            contentValues.put(INGREDIENT_MEASURE_COL, ingredient.getMeasure());
-            contentValues.put(INGREDIENT_QUANTITY_COL, ingredient.getQuantity());
-            contentValues.put(INGREDIENT_INGREDIENT_COL, ingredient.getIngredient());
-            contentValues.put(INGREDIENT_RECIPE_ID_COL, recipeId);
-            db.insert(INGREDIENT_TABLE_NAME, null, contentValues);
-        }
+            ContentValues contentValues = new ContentValues();
 
-        for (Step step: recipe.getSteps()){
-            contentValues.clear();
-            contentValues.put(STEP_JSON_ID_COL, step.getId());
-            contentValues.put(STEP_DESCRIPTION_COL, step.getDescription());
-            contentValues.put(STEP_SHORT_DESC_COL, step.getShortDescription());
-            contentValues.put(STEP_THUMBNAIL_URL_COL, step.getThumbnailURL());
-            contentValues.put(STEP_VIDEO_URL_COL, step.getVideoURL());
-            contentValues.put(STEP_RECIPE_ID_COL, recipeId);
-            db.insert(STEP_TABLE_NAME, null, contentValues);
+            contentValues.put(RECIPE_ID_COL, recipeId);
+            contentValues.put(RECIPE_NAME_COL, recipe.getName());
+            db.insert(RECIPE_TABLE_NAME, null, contentValues);
+
+            for (Ingredient ingredient : recipe.getIngredients()) {
+                contentValues.clear();
+                contentValues.put(INGREDIENT_MEASURE_COL, ingredient.getMeasure());
+                contentValues.put(INGREDIENT_QUANTITY_COL, ingredient.getQuantity());
+                contentValues.put(INGREDIENT_INGREDIENT_COL, ingredient.getIngredient());
+                contentValues.put(INGREDIENT_RECIPE_ID_COL, recipeId);
+                db.insert(INGREDIENT_TABLE_NAME, null, contentValues);
+            }
+
+            for (Step step : recipe.getSteps()) {
+                contentValues.clear();
+                contentValues.put(STEP_JSON_ID_COL, step.getId());
+                contentValues.put(STEP_DESCRIPTION_COL, step.getDescription());
+                contentValues.put(STEP_SHORT_DESC_COL, step.getShortDescription());
+                contentValues.put(STEP_THUMBNAIL_URL_COL, step.getThumbnailURL());
+                contentValues.put(STEP_VIDEO_URL_COL, step.getVideoURL());
+                contentValues.put(STEP_RECIPE_ID_COL, recipeId);
+                db.insert(STEP_TABLE_NAME, null, contentValues);
+            }
         }
     }
 }

@@ -21,7 +21,8 @@ public class NetworkUtility {
                     @Override
                     public void onResponse(List<Recipe> response) {
                         db.insertRecipeFromList(response);
-                        mAdapter.updateData(db);
+                        if (mAdapter != null)
+                             mAdapter.updateData(db);
                     }
 
                     @Override

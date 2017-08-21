@@ -27,11 +27,12 @@ public class RecipeFetchTest {
     @Before
     public void setup(){
         Context appContext = InstrumentationRegistry.getTargetContext();
-        recipes = NetworkUtility.getRecipesFromServer(appContext);
+        NetworkUtility.getRecipesFromServer(null, null);
     }
 
     @Test
     public void checkRecipeCount(){
+        Assert.assertNotNull("Network fetch not successful", recipes);
         Assert.assertEquals(recipes.size(),4);
     }
 }

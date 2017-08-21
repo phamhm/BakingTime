@@ -21,7 +21,7 @@
         <activity
             android:name=".InstructionActivity.InstructionListActivity"
             android:label="@string/title_instruction_list"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".InstructionActivity.InstructionDetailActivity"
             android:label="@string/title_instruction_detail"
@@ -31,6 +31,23 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.hp.bakingapp.InstructionActivity.InstructionListActivity" />
         </activity>
+
+        <receiver android:name=".Widget.BakingGoodWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/baking_good_widget_info" />
+        </receiver>
+
+        <service
+            android:name=".Widget.ListViewService"
+            android:exported="false"
+            android:permission="android.permission.BIND_REMOTEVIEWS" >
+        </service>
+
     </application>
 
 </manifest>

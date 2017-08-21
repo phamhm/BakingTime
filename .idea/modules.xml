@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/BakingApp.iml" filepath="$PROJECT_DIR$/BakingApp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file:///media/Extra/Data/BakingTime/BakingTime.iml" filepath="/media/Extra/Data/BakingTime/BakingTime.iml" />
+      <module fileurl="file:///media/Extra/Data/BakingTime/app/app.iml" filepath="/media/Extra/Data/BakingTime/app/app.iml" />
     </modules>
   </component>
 </project>

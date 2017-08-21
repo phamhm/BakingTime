@@ -29,17 +29,13 @@ public class RecipeSqliteTest {
     @Before
     public void setup(){
         Context appContext = InstrumentationRegistry.getTargetContext();
-        List<Recipe> recipes = NetworkUtility.getRecipesFromServer(appContext);
-
         db = new RecipeDatabase(appContext);
-        for(Recipe recipe : recipes){
-            db.insertRecipe(recipe);
-        }
+
+        NetworkUtility.getRecipesFromServer(null, db);// this is precarious. don't know if the
     }
 
     @After
     public void cleanup(){
-        db.cleanupData();
         db.close();
     }
 
