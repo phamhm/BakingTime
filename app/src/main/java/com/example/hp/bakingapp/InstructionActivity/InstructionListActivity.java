@@ -20,7 +20,6 @@ public class InstructionListActivity extends AppCompatActivity {
      */
     private boolean mTwoPane;
     private RecipeDatabase db;
-    private int recipeId;
 
     public static String RECIPE_INTENT_KEY = "recipe_intent_key";
 
@@ -54,16 +53,16 @@ public class InstructionListActivity extends AppCompatActivity {
             mTwoPane = true;
         }
 
-        recipeId = getIntent().getIntExtra(RECIPE_INTENT_KEY, -1);
+        int recipeId = getIntent().getIntExtra(RECIPE_INTENT_KEY, -1);
         assert recipeId != -1;
         db = new RecipeDatabase(getApplicationContext());
 
-        RecyclerView instructionsListView = (RecyclerView) findViewById(R.id.instruction_list);
+        RecyclerView instructionsListView = findViewById(R.id.instruction_list);
         assert instructionsListView != null;
 
         FragmentManager fm = getSupportFragmentManager();
 
-        InstructionListAdapter adapter = new InstructionListAdapter(fm, db,recipeId, mTwoPane);
+        InstructionListAdapter adapter = new InstructionListAdapter(fm, db, recipeId, mTwoPane);
         instructionsListView.setAdapter(adapter);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);

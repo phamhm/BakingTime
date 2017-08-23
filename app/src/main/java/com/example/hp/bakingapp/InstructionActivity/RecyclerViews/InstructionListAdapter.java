@@ -96,8 +96,7 @@ public class InstructionListAdapter
 
 class InstructionListViewHolder extends RecyclerView.ViewHolder {
     private int recipeId;
-    private int instructionId;
-    private int itemViewType;
+
     private boolean mTwoPane;
 
     @BindView(R.id.content)
@@ -114,8 +113,7 @@ class InstructionListViewHolder extends RecyclerView.ViewHolder {
     public void bind(String text, final int itemViewType, int instructionId,
                      final FragmentManager fm,
                      final int position){
-        this.itemViewType = itemViewType;
-        this.instructionId = instructionId;
+
 
         instruction.setText(text);
         instruction.setOnClickListener(new View.OnClickListener() {
