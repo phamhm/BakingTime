@@ -1,5 +1,8 @@
 package com.example.hp.bakingapp.InstructionActivity;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -22,6 +25,8 @@ import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 /**
  * A fragment representing a single Instruction detail screen.
@@ -127,6 +132,37 @@ public class InstructionDetailFragment extends Fragment {
             playerView.setPlayer(mExoPlayer);
 
             mExoPlayer.setPlayWhenReady(false);
+
+            String thumbnailUrl = mItem.getThumbnailURL();
+
+            Bitmap icon = BitmapFactory.decodeResource(getContext().getResources(),
+                                 R.drawable.exo_controls_play);
+
+            final Bitmap[] thumbnailBitMap = {icon};
+
+            if (thumbnailUrl != null && !thumbnailUrl.equals("")){
+                Target thumbnailTarget = new Target() {
+                    @Override
+                    public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                        thumbnailBitMap[0] = bitmap;
+                    }
+
+                    @Override
+                    public void onBitmapFailed(Drawable errorDrawable) {
+                    }
+
+                    @Override
+                    public void onPrepareLoad(Drawable placeHolderDrawable) {
+                    }
+                } ;
+                Picasso.with(getContext()).load(thumbnailUrl)
+                        .placeholder(R.drawable.exo_controls_play)
+                        .error(R.drawable.exo_controls_play)
+                        .into(thumbnailTarget);
+            }
+
+            playerView.setDefaultArtwork(thumbnailBitMap[0]);
+
 
             String videoUrl = mItem.getVideoURL();
             Log.d("exo debug url", videoUrl);

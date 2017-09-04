@@ -22,13 +22,9 @@ public class RecipeListActivity extends AppCompatActivity {
         setTitle("Baking Recipes");
 
         mAdapter = new RecyclerAdapter();
+        reloadDb();
 
-        if (savedInstanceState == null){
-            // load data from the internet again
-            db = new RecipeDatabase(this);
-        }
-
-        RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.rv_recipe_names);
+        RecyclerView mRecyclerView = findViewById(R.id.rv_recipe_names);
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(this);
         mLinearLayoutManager.setAutoMeasureEnabled(true);
 
@@ -41,18 +37,26 @@ public class RecipeListActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        mAdapter.updateData(db);
+        reloadDb();
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        mAdapter.updateData(db);
+        reloadDb();
+    }
+
+    private void reloadDb(){
+        if(db == null){
+            db = new RecipeDatabase(this);
+            mAdapter.updateData(db);
+        }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        db.close();
+        if(db != null)
+          db.close();
     }
 }

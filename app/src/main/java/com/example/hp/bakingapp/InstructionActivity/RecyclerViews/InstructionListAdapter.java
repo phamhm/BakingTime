@@ -114,7 +114,6 @@ class InstructionListViewHolder extends RecyclerView.ViewHolder {
                      final FragmentManager fm,
                      final int position){
 
-
         instruction.setText(text);
         instruction.setOnClickListener(new View.OnClickListener() {
             @Override
