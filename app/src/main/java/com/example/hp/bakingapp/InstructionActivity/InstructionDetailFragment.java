@@ -135,10 +135,7 @@ public class InstructionDetailFragment extends Fragment {
 
             String thumbnailUrl = mItem.getThumbnailURL();
 
-            Bitmap icon = BitmapFactory.decodeResource(getContext().getResources(),
-                                 R.drawable.exo_controls_play);
-
-            final Bitmap[] thumbnailBitMap = {icon};
+            final Bitmap[] thumbnailBitMap = {null};
 
             if (thumbnailUrl != null && !thumbnailUrl.equals("")){
                 Target thumbnailTarget = new Target() {
@@ -161,7 +158,10 @@ public class InstructionDetailFragment extends Fragment {
                         .into(thumbnailTarget);
             }
 
-            playerView.setDefaultArtwork(thumbnailBitMap[0]);
+            if (thumbnailBitMap[0] != null){
+                playerView.setUseArtwork(true);
+                playerView.setDefaultArtwork(thumbnailBitMap[0]);
+            }
 
 
             String videoUrl = mItem.getVideoURL();
